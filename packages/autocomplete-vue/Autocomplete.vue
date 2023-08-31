@@ -81,6 +81,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    submitOnTab: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -95,6 +99,7 @@ export default {
       onLoading: this.handleLoading,
       onLoaded: this.handleLoaded,
       submitOnEnter: this.submitOnEnter,
+      submitOnTab: this.submitOnTab
     })
     if (this.debounceTime > 0) {
       core.handleInput = debounce(core.handleInput, this.debounceTime)

@@ -21,6 +21,7 @@ class AutocompleteCore {
     onLoading = () => {},
     onLoaded = () => {},
     submitOnEnter = false,
+    submitOnTab = false,
   } = {}) {
     this.search = isPromise(search)
       ? search
@@ -36,6 +37,7 @@ class AutocompleteCore {
     this.onLoading = onLoading
     this.onLoaded = onLoaded
     this.submitOnEnter = submitOnEnter
+    this.submitOnTab = submitOnTab
   }
 
   destroy = () => {
@@ -74,7 +76,19 @@ class AutocompleteCore {
         break
       }
       case 'Tab': {
+        this.selectedResult =
+          this.results[this.selectedIndex] || this.selectedResult
+
+        if (this.submitOnTab) {
+          this.selectedResult =
+            this.results[this.selectedIndex] || this.selectedResult
+
         this.selectResult()
+
+          this.selectedResult && this.onSubmit(this.selectedResult)
+        } else {
+          this.selectResult()
+        }
         break
       }
       case 'Enter': {
